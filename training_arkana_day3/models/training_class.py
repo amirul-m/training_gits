@@ -25,6 +25,7 @@ class TrainingClass(models.Model):
     # relational
     currency_id = fields.Many2one('res.currency', string='Currency')
     mentor_ids = fields.Many2many('res.partner', string='Mentor')
+    attendance_ids = fields.One2many('training.attendance', 'class_id', string="Attendances")
 
     # compute
     total_days = fields.Integer('Days', compute='_compute_total_days')
@@ -47,3 +48,15 @@ class TrainingClass(models.Model):
     @api.onchange('start_date')
     def _onchange_start_date(self):
         self.end_date = self.start_date
+
+
+from odoo import models, fields, api
+
+class TrainingAttendance(models.Model):
+    _name = 'training.attendance'
+    _description = 'Training Attendance'
+    _rec_name = 'attender'
+
+    attender = fields.Char(string='Name')
+    present = fields.Boolean(string='Present')
+    class_id = fields.Many2one('training.class', string='Class')
