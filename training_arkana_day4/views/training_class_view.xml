@@ -20,6 +20,9 @@
             <field name="max_duration" position="before">
                 <field name="max_pertemuan" />
             </field>
+            <field name="state" position="before">
+                <button string="Confirm" name="action_state_confirm" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'draft')]}" />
+            </field>
         </field>
     </record>
 

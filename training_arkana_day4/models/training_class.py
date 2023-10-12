@@ -6,3 +6,7 @@ class TrainingClass(models.Model):
     
     name = fields.Char(string='Class Name')
     max_pertemuan = fields.Integer(string='Maximal Pertemuan')
+
+
+    def action_state_confirm(self):
+        self.state = 'confirm'
